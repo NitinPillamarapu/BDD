@@ -4,7 +4,6 @@ const bdd = createBdd();
 
 const { Given, When, Then } = bdd;
 
-
 Given('I navigate to the login page', async function ({page}) {
   await page.goto('https://practicetestautomation.com/practice-test-login/');
   console.log("Url is loaded")
