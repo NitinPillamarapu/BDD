@@ -19,6 +19,7 @@ Background:
   | incorrectUser | Password123 | Your username is invalid! |
   | student | incorrectPassword | Your password is invalid! |
 
+  @regression
   Scenario: User logs in with multiple credentials
     Given The user logs in with the following credentials:
       | username | password |
