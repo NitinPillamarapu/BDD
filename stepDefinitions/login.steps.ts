@@ -44,8 +44,6 @@ Given('The user logs in with the following credentials:', async function ({ page
   const credentials = dataTable.hashes();
 
   for (const { username, password } of credentials) {
-    await page.goto('https://practicetestautomation.com/practice-test-login/');
-
     await expect(page.locator(`//section[@id='login']`)).toBeVisible();
     console.log(`Attempting login for: ${username}`);
 
