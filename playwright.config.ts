@@ -6,7 +6,6 @@ const testDir = defineBddConfig({
     steps: ["stepDefinitions/*.steps.ts"],
 })
 
-const isCi = !!process.env.CI;
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -38,7 +37,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: isCi,
+    headless: false,
   },
 
   /* Configure projects for major browsers */

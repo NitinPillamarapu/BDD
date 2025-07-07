@@ -42,7 +42,10 @@ Then('I should see the error message {string}', async function ({page}, errorMes
 Given('The user logs in with the following credentials:', async function ({ page }, dataTable) {
   const credentials = dataTable.hashes();
 
+  //looping through each record under the data table
   for (const { username, password } of credentials) {
+
+    //checking the login page
     await expect(page.locator(`//section[@id='login']`)).toBeVisible();
     console.log(`Attempting login for: ${username}`);
 
@@ -50,19 +53,20 @@ Given('The user logs in with the following credentials:', async function ({ page
     await page.fill('#password', password);
     await page.click('#submit');
 
-    // Determine success or failure
+    //storing the locators
     const successHeading = page.locator('//*[@id="loop-container"]/div/article/div[1]/h1');
     const errorMsg = page.locator('#error');
 
+    //checking whether messagesa are displayed if displayed then perform further actions
     if (await successHeading.isVisible()) {
       const message = await successHeading.innerText();
-      console.log(`Success: ${username} - "${message}"`);
-      await page.getByText('Log out').click(); // logout to reset state
-    } else if (await errorMsg.isVisible()) {
+      console.log(`Success message: "${message}"`);
+      await page.getByText('Log out').click();
+      console.log(`logged out`)
+    } 
+    else if (await errorMsg.isVisible()) {
       const errorText = await errorMsg.innerText();
-      console.log(`Error for ${username}: "${errorText}"`);
-    } else {
-      console.warn(`No success or error message visible for ${username}`);
+      console.log(`Error message "${errorText}"`);
     }
   }
 });
